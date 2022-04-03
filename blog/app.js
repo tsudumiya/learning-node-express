@@ -132,15 +132,9 @@ app.post('/login', (req, res) => {
         [email],
         (error, results) => {
             if (results.length > 0) {
-                // 定数plainを定義してください
                 const plain = req.body.password;
-
-                // 定数hashを定義してください
                 const hash = results[0].password;
-
-                // パスワードを比較するためのcompareメソッドを追加してください
                 bcrypt.compare(plain, hash, (error, isEqual) => {
-                    // 比較した結果によって処理を変える
                     if (isEqual) {
                         req.session.userId = results[0].id;
                         req.session.username = results[0].username;
